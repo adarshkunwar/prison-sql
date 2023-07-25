@@ -5,7 +5,7 @@ const {
   getSingleData,
   deleteData,
   updateData,
-} = require("../controllers/data");
+} = require("../controller/prisons");
 const router = Router();
 router.route("/").get(getData).post(postData);
 router.route("/:id").get(getSingleData).delete(deleteData).patch(updateData);

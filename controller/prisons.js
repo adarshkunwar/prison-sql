@@ -1,10 +1,16 @@
-const Contact = require("../models/Data");
+const Contact = require("../models/prison");
 
 const postData = async (req, res) => {
   console.log(req.body);
   try {
-    const { name, email, contact } = req.body;
-    const contactModal = new Contact(name, email, contact);
+    const { prison_name, location, capacity, occupancy } = req.body;
+    const prisonData = {
+      prison_name,
+      location,
+      capacity,
+      occupancy,
+    };
+    const contactModal = new Contact(prisonData);
     const createRecord = await contactModal.create();
 
     return res.status(200).json({
@@ -17,12 +23,7 @@ const postData = async (req, res) => {
 };
 
 const getData = async (req, res) => {
-  try {
-    const contactModal = await Contact.findAll();
-    return res.status(200).json(contactModal[0]);
-  } catch (error) {
-    console.log(error);
-  }
+  res.send("hello getting data");
 };
 
 const getSingleData = async (req, res) => {
