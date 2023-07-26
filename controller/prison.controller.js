@@ -1,16 +1,18 @@
-/* const Prison =  require("../models/prison");
+const Prison =  require("../models/prison.model");
 
 const postData = async (req, res) => {
   console.log(req.body);
+  console.log("trying to post data")
   try {
-    const { prison_name, location, capacity, occupancy } = req.body;
+    const { prison_name, prison_location, prison_capacity, prison_occupancy } = req.body;
     const prisonData = {
       prison_name,
-      location,
-      capacity,
-      occupancy,
+        prison_location,
+        prison_capacity,
+        prison_occupancy,
     };
     const PrisonModal = new Prison(prisonData);
+    
     const createRecord = await PrisonModal.create();
 
     return res.status(200).json({
@@ -23,7 +25,13 @@ const postData = async (req, res) => {
 };
 
 const getData = async (req, res) => {
-  res.send("hello getting data");
+    try {
+        console.log("-----------controller begins here-----------")
+        const getRecord = await Prison.findAll();
+        return res.status(200).json(getRecord[0]);
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const getSingleData = async (req, res) => {
@@ -70,4 +78,3 @@ module.exports = {
   deleteData,
   updateData,
 };
- */
